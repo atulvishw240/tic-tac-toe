@@ -9,9 +9,12 @@ class Board
   # -------------
 
   # This method displays board
+  attr_accessor :board, :player1, :player2
 
-  def initialize
+  def initialize(player1, player2)
     @board = Array.new(3) { Array.new(3, " ") }
+    @player1 = player1
+    @player2 = player2
   end
 
   def display
@@ -26,7 +29,12 @@ class Board
 
     puts "-------------"
   end
-end
 
-board = Board.new
-board.display
+  def make_move(player)
+    puts "Enter row: "
+    row = gets.chomp.to_i
+    puts "Enter col: "
+    col = gets.chomp.to_i
+    self.board[row][col] = player.symbol
+  end
+end
