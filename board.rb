@@ -1,14 +1,5 @@
 # Create our board for game
 class Board
-  # -------------
-  # | X | X | X |
-  # -------------
-  # | 0 | 0 | X |
-  # -------------
-  # | X | 0 | X |
-  # -------------
-
-  # This method displays board
   @@no_of_turns = 0
 
   attr_accessor :board, :player1, :player2
@@ -89,7 +80,7 @@ class Board
   end
 
   # displays losing message
-  def lost(player)
+  def lost
     return unless @@no_of_turns == 9
 
     puts "Draw!!"
@@ -99,9 +90,31 @@ class Board
     # 1. Check for each row
     # 2. Check for each column
     # 3. Check for diagonals
-    return unless check_col(player) || check_row(player) || check_diagonal(player)
+    check_col(player) || check_row(player) || check_diagonal(player)
+  end
 
+  def message(player)
     puts "#{player.name} won the Game!!"
-    lost(player)
+  end
+
+
+  def play
+    i = 0
+    make_move(player1)
+    while i < 4
+      make_move(player2)
+      if who_won(player2)
+        message(player2)
+        break
+      end 
+
+      make_move(player1)
+      if who_won(player1)
+        message(player1)
+        break
+      end
+    end
+
+    lost
   end
 end
