@@ -6,13 +6,4 @@ class Player
     @name = name
     @symbol = symbol
   end
-
-  # move method for player to make a move
-  # def make_move
-  #   puts "Enter row: "
-  #   row = gets.chomp.to_i
-  #   puts "Enter col: "
-  #   col = gets.chomp.to_i
-  #   @board[row][col] = self.symbol
-  # end
 end

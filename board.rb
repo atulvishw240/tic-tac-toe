@@ -26,6 +26,7 @@ class Board
   end
 
   def make_move(player)
+    puts "Its #{player.name} turn"
     puts "Enter row: "
     row = gets.chomp.to_i
     puts "Enter col: "
@@ -84,7 +85,7 @@ class Board
   def lost
     return unless @@no_of_turns == 9
 
-    puts "Draw!!"
+    puts "The Game ended in Draw!!"
   end
 
   def who_won(player)
@@ -98,7 +99,8 @@ class Board
     puts "#{player.name} won the Game!!"
   end
 
-  def play
+  def play(player1, player2)
+    puts "#{player1.name} is #{player1.symbol} and #{player2.name} is #{player2.symbol} "
     i = 0
     make_move(player1)
     while i < 4
