@@ -46,6 +46,7 @@ class Board
         counter += 1 if board[i][j] == player.symbol
         j += 1
       end
+
       return true if counter == 3
 
       i += 1
@@ -97,7 +98,6 @@ class Board
     puts "#{player.name} won the Game!!"
   end
 
-
   def play
     i = 0
     make_move(player1)
@@ -106,13 +106,14 @@ class Board
       if who_won(player2)
         message(player2)
         break
-      end 
+      end
 
       make_move(player1)
       if who_won(player1)
         message(player1)
         break
       end
+      i += 1
     end
 
     lost
