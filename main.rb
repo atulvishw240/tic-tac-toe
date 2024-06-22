@@ -7,6 +7,11 @@ board = Board.new(player1, player2)
 
 board.display
 board.make_move(player1)
-board.display
 board.make_move(player2)
-board.display
+board.make_move(player1)
+board.make_move(player2)
+board.make_move(player1)
+board.make_move(player2)
+board.make_move(player1)
+board.make_move(player2)
+board.make_move(player1)
