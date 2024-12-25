@@ -11,11 +11,11 @@ class Board
 
   def display
     puts "    0   1   2  "
-    @board.each_with_index do |element, row|
+    board.each_with_index do |row, row_index|
       puts "  -------------"
-      print "#{row} "
-      element.each_with_index do |_elem, col|
-        print "| #{@board[row][col]} "
+      print "#{row_index} "
+      row.each_index do |col_index|
+        print "| #{@board[row_index][col_index]} "
       end
 
       print "|\n"
