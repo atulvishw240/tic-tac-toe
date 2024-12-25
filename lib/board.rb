@@ -1,18 +1,20 @@
 # Create our board for game
 class Board
-  attr_accessor :board, :player1, :player2, :no_of_turns
+  attr_accessor :board, :current_player_id, :no_of_turns
 
   def initialize(player1, player2)
     @board = Array.new(3) { Array.new(3, " ") }
-    @player1 = player1
-    @player2 = player2
+    @players = [player1, player2]
+    @current_player_id = 0
     @no_of_turns = 0
+
     puts "#{player1.name} is #{player1.symbol} and #{player2.name} is #{player2.symbol} "
   end
 
   def play(player1, player2)
     i = 0
-    make_move(player1)
+    move = make_move(player1)
+    update_board(player1, move)
     while i < 4
       make_move(player2)
       if who_won(player2)
@@ -31,6 +33,14 @@ class Board
     lost
   end
 
+  def current_player
+    @players[current_player_id]
+  end
+
+  def switch_players!
+    self.current_player_id -= 1
+  end
+
   def display
     puts "    0   1   2  "
     board.each_with_index do |row, row_index|
@@ -47,31 +57,20 @@ class Board
   end
 
   def make_move(player)
+    self.no_of_turns += 1
+
     puts "It's #{player.name} turn"
     print "Enter your move in the form (row col): "
-    move = gets.chomp.split(" ")
-    self.no_of_turns += 1
+    gets.chomp.split(" ")
   end
 
   def update_board(player, move)
     row = move[0]
     col = move[1]
     board[row][col] = player.symbol
+    display
   end
 
-  # def make_move(player)
-  #   puts "Its #{player.name} turn"
-  #   puts "Enter row: "
-  #   row = gets.chomp.to_i
-  #   puts "Enter col: "
-  #   col = gets.chomp.to_i
-  #   board[row][col] = player.symbol
-  #   display
-  #   self.no_of_turns += 1
-  #   who_won(player)
-  # end
-
-  # Checks row to see our winning condition
   def row_match?(player)
     board.any? do |row|
       row.all? { |marker| marker == player.symbol }
@@ -79,7 +78,7 @@ class Board
   end
 
   # Checks col to see our winning condition
-  def check_col(player)
+  def col_match?(player)
     col_index = 0
     while col_index < 3
       row_index = 0
@@ -97,7 +96,7 @@ class Board
   end
 
   # Checks diagonals to see our winning conditon
-  def check_diagonal(player)
+  def diagonal_match?(player)
     diagonal_winning_moves = [[[0, 0], [1, 1], [2, 2]], [[0, 2], [1, 1], [2, 0]]]
 
     diagonal_winning_moves.any? do |diagonal|
