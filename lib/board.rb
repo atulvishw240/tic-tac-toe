@@ -16,13 +16,15 @@ class Board
     while i < 9
       move = current_player.make_move
       update_board(current_player, move)
-      break if won?(current_player)
+      if won?(current_player)
+        winning_message(current_player)
+        break
+      end
 
       switch_players!
       i += 1
     end
 
-    winning_message(current_player)
     draw
   end
 
