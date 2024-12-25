@@ -12,6 +12,7 @@ class Board
   end
 
   def play
+    display
     i = 0
     while i < 9
       move = current_player.make_move
@@ -27,6 +28,9 @@ class Board
 
     draw
   end
+
+  #-----------------x ALL PRIVATE METHODS ARE BELOW  ----------------x
+  private
 
   def current_player
     @players[current_player_id]
