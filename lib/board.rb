@@ -58,8 +58,8 @@ class Board
   end
 
   def update_board(player, move)
-    row = move[0]
-    col = move[1]
+    row = move[0].to_i
+    col = move[1].to_i
     board[row][col] = player.symbol
     display
   end
@@ -79,7 +79,7 @@ class Board
       while row_index < 3
         counter += 1 if board[row_index][col_index] == player.symbol
 
-        i += 1
+        row_index += 1
       end
 
       return true if counter == 3
