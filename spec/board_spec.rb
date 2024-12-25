@@ -46,4 +46,18 @@ describe Board do
       expect(board.row_match?(player1)).to eql(true)
     end
   end
+
+  describe "#col_match?" do
+    it "returns true if a row contains same player marker" do
+      player1 = Player.new("Player1", "X")
+      player2 = Player.new("Player2", "O")
+      board = Board.new(player1, player2)
+
+      board.update_board(player1, [0, 0])
+      board.update_board(player1, [1, 0])
+      board.update_board(player1, [2, 0])
+
+      expect(board.col_match?(player1)).to eql(true)
+    end
+  end
 end
