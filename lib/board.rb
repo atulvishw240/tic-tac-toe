@@ -7,6 +7,28 @@ class Board
     @player1 = player1
     @player2 = player2
     @no_of_turns = 0
+    puts "#{player1.name} is #{player1.symbol} and #{player2.name} is #{player2.symbol} "
+  end
+
+  def play(player1, player2)
+    i = 0
+    make_move(player1)
+    while i < 4
+      make_move(player2)
+      if who_won(player2)
+        message(player2)
+        break
+      end
+
+      make_move(player1)
+      if who_won(player1)
+        message(player1)
+        break
+      end
+      i += 1
+    end
+
+    lost
   end
 
   def display
@@ -29,6 +51,12 @@ class Board
     print "Enter your move in the form (row col): "
     move = gets.chomp.split(" ")
     self.no_of_turns += 1
+  end
+
+  def update_board(player, move)
+    row = move[0]
+    col = move[1]
+    board[row][col] = player.symbol
   end
 
   # def make_move(player)
@@ -103,27 +131,5 @@ class Board
 
   def message(player)
     puts "#{player.name} won the Game!!"
-  end
-
-  def play(player1, player2)
-    puts "#{player1.name} is #{player1.symbol} and #{player2.name} is #{player2.symbol} "
-    i = 0
-    make_move(player1)
-    while i < 4
-      make_move(player2)
-      if who_won(player2)
-        message(player2)
-        break
-      end
-
-      make_move(player1)
-      if who_won(player1)
-        message(player1)
-        break
-      end
-      i += 1
-    end
-
-    lost
   end
 end
