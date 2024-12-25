@@ -113,6 +113,6 @@ class Board
   end
 
   def winning_message(player)
-    "#{player.name} won the Game!!"
+    puts "#{player.name} won the Game!!"
   end
 end
