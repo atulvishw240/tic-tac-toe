@@ -6,4 +6,10 @@ class Player
     @name = name
     @symbol = symbol
   end
+
+  def make_move
+    puts "It's #{name} turn"
+    print "Enter your move in the form (row col): "
+    gets.chomp.split(" ")
+  end
 end

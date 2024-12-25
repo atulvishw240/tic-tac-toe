@@ -14,7 +14,8 @@ class Board
   def play
     i = 0
     while i < 9
-      make_move(current_player)
+      move = current_player.make_move
+      update_board(current_player, move)
       break if won?(current_player)
 
       switch_players!
@@ -33,6 +34,14 @@ class Board
     self.current_player_id = 1 - current_player_id
   end
 
+  def update_board(player, move)
+    row = move[0].to_i
+    col = move[1].to_i
+    board[row][col] = player.symbol
+    self.no_of_turns += 1
+    display
+  end
+
   def display
     puts "    0   1   2  "
     board.each_with_index do |row, row_index|
@@ -48,29 +57,12 @@ class Board
     puts "  -------------"
   end
 
-  def make_move(player)
-    self.no_of_turns += 1
-
-    puts "It's #{player.name} turn"
-    print "Enter your move in the form (row col): "
-    move = gets.chomp.split(" ")
-    update_board(player, move)
-  end
-
-  def update_board(player, move)
-    row = move[0].to_i
-    col = move[1].to_i
-    board[row][col] = player.symbol
-    display
-  end
-
   def row_match?(player)
     board.any? do |row|
       row.all? { |marker| marker == player.symbol }
     end
   end
 
-  # Checks col to see our winning condition
   def col_match?(player)
     col_index = 0
     while col_index < 3
@@ -88,7 +80,6 @@ class Board
     end
   end
 
-  # Checks diagonals to see our winning conditon
   def diagonal_match?(player)
     diagonal_winning_moves = [[[0, 0], [1, 1], [2, 2]], [[0, 2], [1, 1], [2, 0]]]
 
@@ -101,7 +92,6 @@ class Board
     end
   end
 
-  # displays losing message
   def draw
     return unless no_of_turns == 9
 
