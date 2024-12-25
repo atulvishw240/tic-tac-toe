@@ -80,28 +80,32 @@ class Board
 
   # Checks col to see our winning condition
   def check_col(player)
-    j = 0
-    while j < 3
-      i = 0
+    col_index = 0
+    while col_index < 3
+      row_index = 0
       counter = 0
-      while i < 3
-        counter += 1 if board[i][j] == player.symbol
+      while row_index < 3
+        counter += 1 if board[row_index][col_index] == player.symbol
 
         i += 1
       end
 
       return true if counter == 3
 
-      j += 1
+      col_index += 1
     end
   end
 
   # Checks diagonals to see our winning conditon
   def check_diagonal(player)
-    if (board[0][0] == player.symbol && board[0][0] == board[1][1] && board[1][1] == board[2][2]) ||
-       (board[0][2] == player.symbol && board[0][2] == board[1][1] && board[1][1] == board[2][0])
+    diagonal_winning_moves = [[[0, 0], [1, 1], [2, 2]], [[0, 2], [1, 1], [2, 0]]]
 
-      true
+    diagonal_winning_moves.any? do |diagonal|
+      diagonal.all? do |coord|
+        row_index = coord[0]
+        col_index = coord[1]
+        board[row_index][col_index] == player.marker
+      end
     end
   end
 
