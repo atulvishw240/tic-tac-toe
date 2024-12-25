@@ -72,19 +72,9 @@ class Board
   # end
 
   # Checks row to see our winning condition
-  def check_row(player)
-    i = 0 # Keep track of rows
-    while i < 3
-      j = 0 # Keep track of the column
-      counter = 0 # When counter == 3 on a single row you have won
-      while j < 3
-        counter += 1 if board[i][j] == player.symbol
-        j += 1
-      end
-
-      return true if counter == 3
-
-      i += 1
+  def row_match?(player)
+    board.any? do |row|
+      row.all? { |marker| marker == player.symbol }
     end
   end
 
