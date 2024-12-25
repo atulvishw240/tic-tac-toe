@@ -1,13 +1,12 @@
 # Create our board for game
 class Board
-  @@no_of_turns = 0
-
-  attr_accessor :board, :player1, :player2
+  attr_accessor :board, :player1, :player2, :no_of_players
 
   def initialize(player1, player2)
     @board = Array.new(3) { Array.new(3, " ") }
     @player1 = player1
     @player2 = player2
+    @no_of_turns = 0
   end
 
   def display
@@ -33,7 +32,7 @@ class Board
     col = gets.chomp.to_i
     board[row][col] = player.symbol
     display
-    @@no_of_turns += 1
+    no_of_turns += 1
     who_won(player)
   end
 
