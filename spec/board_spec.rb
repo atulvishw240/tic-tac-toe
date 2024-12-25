@@ -21,4 +21,15 @@ describe Board do
       expect(board.switch_players!).to eql(1)
     end
   end
+
+  describe "#update_board" do
+    it "updates the board with player's move" do
+      player1 = Player.new("Player1", "X")
+      player2 = Player.new("Player2", "O")
+      board = Board.new(player1, player2)
+      board.update_board(player1, [1, 1])
+
+      expect(board.board[1][1]).to eql("X")
+    end
+  end
 end
