@@ -30,7 +30,7 @@ class Board
   end
 
   def switch_players!
-    self.current_player_id -= 1
+    self.current_player_id = 1 - current_player_id
   end
 
   def display
