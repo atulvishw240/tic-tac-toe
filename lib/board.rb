@@ -96,7 +96,7 @@ class Board
       diagonal.all? do |coord|
         row_index = coord[0]
         col_index = coord[1]
-        board[row_index][col_index] == player.marker
+        board[row_index][col_index] == player.symbol
       end
     end
   end
