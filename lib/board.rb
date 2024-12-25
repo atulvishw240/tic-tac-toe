@@ -1,6 +1,6 @@
 # Create our board for game
 class Board
-  attr_accessor :board, :player1, :player2, :no_of_players
+  attr_accessor :board, :player1, :player2, :no_of_turns
 
   def initialize(player1, player2)
     @board = Array.new(3) { Array.new(3, " ") }
@@ -25,16 +25,23 @@ class Board
   end
 
   def make_move(player)
-    puts "Its #{player.name} turn"
-    puts "Enter row: "
-    row = gets.chomp.to_i
-    puts "Enter col: "
-    col = gets.chomp.to_i
-    board[row][col] = player.symbol
-    display
-    no_of_turns += 1
-    who_won(player)
+    puts "It's #{player.name} turn"
+    print "Enter your move in the form (row col): "
+    move = gets.chomp.split(" ")
+    self.no_of_turns += 1
   end
+
+  # def make_move(player)
+  #   puts "Its #{player.name} turn"
+  #   puts "Enter row: "
+  #   row = gets.chomp.to_i
+  #   puts "Enter col: "
+  #   col = gets.chomp.to_i
+  #   board[row][col] = player.symbol
+  #   display
+  #   self.no_of_turns += 1
+  #   who_won(player)
+  # end
 
   # Checks row to see our winning condition
   def check_row(player)
@@ -82,7 +89,7 @@ class Board
 
   # displays losing message
   def lost
-    return unless @@no_of_turns == 9
+    return unless no_of_turns == 9
 
     puts "The Game ended in Draw!!"
   end
