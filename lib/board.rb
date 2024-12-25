@@ -11,26 +11,18 @@ class Board
     puts "#{player1.name} is #{player1.symbol} and #{player2.name} is #{player2.symbol} "
   end
 
-  def play(player1, player2)
+  def play
     i = 0
-    move = make_move(player1)
-    update_board(player1, move)
-    while i < 4
-      make_move(player2)
-      if who_won(player2)
-        message(player2)
-        break
-      end
+    while i < 9
+      make_move(current_player)
+      break if won?(current_player)
 
-      make_move(player1)
-      if who_won(player1)
-        message(player1)
-        break
-      end
+      switch_players!
       i += 1
     end
 
-    lost
+    winning_message(current_player)
+    draw
   end
 
   def current_player
@@ -61,7 +53,8 @@ class Board
 
     puts "It's #{player.name} turn"
     print "Enter your move in the form (row col): "
-    gets.chomp.split(" ")
+    move = gets.chomp.split(" ")
+    update_board(player, move)
   end
 
   def update_board(player, move)
@@ -109,20 +102,17 @@ class Board
   end
 
   # displays losing message
-  def lost
+  def draw
     return unless no_of_turns == 9
 
     puts "The Game ended in Draw!!"
   end
 
-  def who_won(player)
-    # 1. Check for each row
-    # 2. Check for each column
-    # 3. Check for diagonals
-    check_col(player) || check_row(player) || check_diagonal(player)
+  def won?(player)
+    col_match?(player) || row_match?(player) || diagonal_match?(player)
   end
 
-  def message(player)
-    puts "#{player.name} won the Game!!"
+  def winning_message(player)
+    "#{player.name} won the Game!!"
   end
 end
