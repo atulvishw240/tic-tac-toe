@@ -30,7 +30,7 @@ class Board
   end
 
   #-----------------x ALL PRIVATE METHODS ARE BELOW  ----------------x
-  private
+  # private
 
   def current_player
     @players[current_player_id]

@@ -74,4 +74,30 @@ describe Board do
       expect(board.diagonal_match?(player1)).to eql(true)
     end
   end
+
+  describe "#display" do
+    it "prints the board" do
+      player1 = Player.new("Atul", "X")
+      player2 = Player.new("Gaurav", "O")
+      game_board = Board.new(player1, player2)
+
+      game_board.board[0][0] = "X"
+      game_board.board[1][1] = "O"
+      game_board.board[2][2] = "X"
+
+      # Now our output will go to this new StringIO object (which $stdout points to)
+      $stdout = StringIO.new
+      game_board.display
+      $stdout.rewind # Now we're at the beginning of our string we received
+
+      expect($stdout.gets).to eq("    0   1   2  \n")
+      expect($stdout.gets).to eq("  -------------\n")
+      expect($stdout.gets).to eq("0 | X |   |   |\n")
+      expect($stdout.gets).to eq("  -------------\n")
+      expect($stdout.gets).to eq("1 |   | O |   |\n")
+      expect($stdout.gets).to eq("  -------------\n")
+      expect($stdout.gets).to eq("2 |   |   | X |\n")
+      expect($stdout.gets).to eq("  -------------\n")
+    end
+  end
 end
