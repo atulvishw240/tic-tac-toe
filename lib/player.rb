@@ -1,3 +1,5 @@
+require_relative "../lib/move"
+
 # Create Player for our game
 class Player
   attr_reader :name, :symbol
@@ -8,8 +10,8 @@ class Player
   end
 
   def make_move
-    puts "It's #{name} turn"
-    print "Enter your move in the form (row col): "
-    gets.chomp.split(" ")
+    print "Enter your move in the form (row,col): "
+    move = gets.chomp.split(",").map(&:to_i)
+    Move.new(move[0], move[1])
   end
 end
