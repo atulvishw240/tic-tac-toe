@@ -1,5 +1,5 @@
 # Represent a Move
-class Move
+class Position
   attr_accessor :row, :col
 
   def initialize(row_index, col_index)
