@@ -8,7 +8,7 @@ class Game
     @current_player_id = 0
   end
 
-  def play
+  def play # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     loop do
       board.display
       move = current_player.make_move
@@ -25,6 +25,8 @@ class Game
       switch_players!
     end
   end
+
+  private
 
   def current_player
     @players[current_player_id]
