@@ -6,10 +6,6 @@ class Board
     @board = Array.new(3) { Array.new(3, " ") }
   end
 
-  def mark_cell(position, marker)
-    board[position.row][position.col] = marker
-  end
-
   def cell_empty?(position)
     board[position.row][position.col].nil?
   end
@@ -50,5 +46,9 @@ class Board
     end
 
     puts "  -------------"
+  end
+
+  def update(position, marker)
+    board[position.row][position.col] = marker
   end
 end
