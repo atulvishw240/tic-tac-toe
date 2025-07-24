@@ -8,6 +8,24 @@ class Game
     @current_player_id = 0
   end
 
+  def play
+    loop do
+      board.display
+      move = current_player.make_move
+      board.update(move, current_player.symbol)
+
+      if won?(current_player)
+        puts "#{current_player.name} won the game!"
+        return
+      elsif board.full?
+        puts "The game ended in draw!"
+        return
+      end
+
+      switch_players!
+    end
+  end
+
   def current_player
     @players[current_player_id]
   end
@@ -18,5 +36,22 @@ class Game
 
   def switch_players!
     self.current_player_id = 1 - current_player_id
+  end
+
+  def won?(player)
+    # Check rows
+    row = board.rows.any? do |row|
+      row.all? { |marker| marker == player.symbol }
+    end
+
+    col = board.columns.any? do |col|
+      col.all? { |marker| marker == player.symbol }
+    end
+
+    dia = board.diagonals.any? do |diag|
+      diag.all? { |marker| marker == player.symbol }
+    end
+
+    row || col || dia
   end
 end

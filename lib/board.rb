@@ -7,7 +7,7 @@ class Board
   end
 
   def cell_empty?(position)
-    board[position.row][position.col].nil?
+    board[position.row][position.col] == " "
   end
 
   def cell_value(position)
@@ -15,7 +15,7 @@ class Board
   end
 
   def full?
-    board.flatten.none?(&:nil?)
+    board.flatten.none? { |elem| elem == " " }
   end
 
   def rows
