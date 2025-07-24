@@ -40,18 +40,18 @@ class Game
 
   def won?(player)
     # Check rows
-    row = board.rows.any? do |row|
+    check_row = board.rows.any? do |row|
       row.all? { |marker| marker == player.symbol }
     end
 
-    col = board.columns.any? do |col|
+    check_col = board.columns.any? do |col|
       col.all? { |marker| marker == player.symbol }
     end
 
-    dia = board.diagonals.any? do |diag|
+    check_diag = board.diagonals.any? do |diag|
       diag.all? { |marker| marker == player.symbol }
     end
 
-    row || col || dia
+    check_row || check_col || check_diag
   end
 end
