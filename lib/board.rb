@@ -36,4 +36,19 @@ class Board
       [board[0][2], board[1][1], board[2][0]]
     ]
   end
+
+  def display
+    puts "    0   1   2  "
+    board.each_with_index do |row, row_index|
+      puts "  -------------"
+      print "#{row_index} "
+      row.each_index do |col_index|
+        print "| #{@board[row_index][col_index]} "
+      end
+
+      print "|\n"
+    end
+
+    puts "  -------------"
+  end
 end
